@@ -7,6 +7,34 @@ const { frontmatter } = Astro.props;
   <div class="flex flex-col items-center">
     <p>Written by: {frontmatter.author}</p>
     <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
+    <div class="tags">
+    {
+      frontmatter.tags.map((tag: string) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>
+            {tag.replace(tag.charAt(0), tag.charAt(0).toUpperCase())}
+          </a>
+        </p>
+      ))
+    }
+  </div>
     <slot />
   </div>
 </BaseLayout>
+
+<style>
+  a {
+    color: #00539f;
+  }
+
+  .tags {
+    @apply flex flex-wrap;
+  }
+
+  .tag {
+    @apply m-1 border border-dotted py-1 px-2 cursor-pointer rounded-lg;
+    border-color: #a1a1a1;
+    font-size: 0.75rem;
+    background-color: #F8FCFD;
+  }
+</style>

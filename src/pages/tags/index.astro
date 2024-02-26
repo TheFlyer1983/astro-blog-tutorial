@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pageTitle = 'Tag Index';
+const allPosts = await Astro.glob('../posts/*.md');
+
+const uniqueTags = [
+  ...new Set(allPosts.flatMap((post) => post.frontmatter.tags))
+];
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  Here are a list of the tags:
+  <div class="tags">
+    {
+      uniqueTags.map((tag) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>
+            {tag.replace(tag.charAt(0), tag.charAt(0).toUpperCase())}
+          </a>
+        </p>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  a {
+    color: #00539f;
+  }
+
+  .tags {
+    @apply flex flex-wrap;
+  }
+
+  .tag {
+    @apply m-1 border border-dotted py-2 px-4 cursor-pointer rounded-lg;
+    border-color: #a1a1a1;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+</style>
