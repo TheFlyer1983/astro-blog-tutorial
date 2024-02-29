@@ -1,11 +1,12 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const pageTitle = 'Tag Index';
-const allPosts = await Astro.glob('../posts/*.md');
+const allPosts = await getCollection('posts');
 
 const uniqueTags = [
-  ...new Set(allPosts.flatMap((post) => post.frontmatter.tags))
+  ...new Set(allPosts.flatMap((post) => post.data.tags))
 ];
 ---
 
@@ -34,9 +35,9 @@ const uniqueTags = [
   }
 
   .tag {
-    @apply m-1 border border-dotted py-2 px-4 cursor-pointer rounded-lg;
+    @apply m-1 cursor-pointer rounded-lg border border-dotted px-4 py-2;
     border-color: #a1a1a1;
     font-size: 1.15em;
-    background-color: #F8FCFD;
+    background-color: #f8fcfd;
   }
 </style>
