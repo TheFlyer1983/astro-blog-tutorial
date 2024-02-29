@@ -1,11 +1,13 @@
-const hamburger = document.querySelector<HTMLElement>('.hamburger');
+document.addEventListener('astro:page-load', () => {
+  const hamburger = document.querySelector<HTMLElement>('.hamburger');
 
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    const navLinks = document.querySelector('.nav-links');
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      const navLinks = document.querySelector('.nav-links');
 
-    if (navLinks) {
-      navLinks.classList.toggle('expanded');
-    }
-  });
-}
+      if (navLinks) {
+        navLinks.classList.toggle('expanded');
+      }
+    });
+  }
+});
